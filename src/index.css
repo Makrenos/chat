@@ -162,12 +162,12 @@ white-space: nowrap;
 }
 
 
-@media (min-width: 650px) {
+
   .right-pane {
     border: solid #aaa;
     border-width: 0 0 0 1px;
   }
-}
+
 
 
 
