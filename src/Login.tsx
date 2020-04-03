@@ -12,7 +12,9 @@ export class Login extends React.Component<{}, Register>
     
     {
         
-  
+        if(this.state.email == "JNH1DH"){
+            this.setState( { displayName: "Kovács László" });
+        }
         return (
             
             <div className="login">
@@ -21,7 +23,7 @@ export class Login extends React.Component<{}, Register>
                 <TextInput type="text" placeholder="Display Name (Agent Smith)" value={ this.state.displayName }
                 onChange={ e => this.setState( { displayName: e } ) } onEnter={ () => this.onClick() } /> 
                 }
-                <TextInput type="email" placeholder="Email (someone@example.com)" value={ this.state.email } onChange={ e => this.setState( { email: e } ) } onEnter={ () => this.onClick() } autofocus={ true }/>
+                <TextInput type="email" placeholder="Email (someone@example.com)" value={ this.state.email } onChange={ e =>  this.setState( { email: e } ) } onEnter={ () => this.onClick() } autofocus={ true }/>
                 <TextInput type="password" placeholder="Password" value={ this.state.password } onChange={ e => this.setState( { password: e } ) } onEnter={ () => this.onClick() }/>
                 <button type="button" onClick={ () => this.onClick() }>
                     { this.state.register ? "Register" : "Login" }
@@ -35,13 +37,12 @@ export class Login extends React.Component<{}, Register>
                 
             </div> 
         );
+        
     }
 
     onClick()
     {
-        if(this.state.email == "JNH1DH"){
-            this.setState( { displayName: "Kovács László" });
-        }
+        
         if ( this.state.register )
         proxy.sendPacket( { type: "register", email: this.state.email, password: this.state.password,
         displayName: this.state.displayName, staySignedIn: false } );
