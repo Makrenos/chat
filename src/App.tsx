@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Login } from './Login'
+import { Main } from './Main';
+import { proxy } from './Proxy';
 
-function App() {
+export default class App extends Component
+{
+  
+  state = { register: true };
+  
+
+render()
+{
+  proxy.addEventListener("login", () => this.setState( { register: false }), this);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+    { this.state.register ? <Login /> :  <Main /> }
     </div>
-  );
+    );
 }
 
-export default App;
+}
