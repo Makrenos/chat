@@ -3,27 +3,31 @@ import { proxy } from './Proxy';
 import './TextInput.css'
 import { TextInput } from './TextInput';
 
-type Base = { email: string, password: string };
 type Register = { email: string, password: string, displayName: string, register: boolean };
 export class Login extends React.Component<{}, Register>
 {
-    state = { email: "", password: "", displayName: "", register: false };
+    constructor(props) {
+        super(props);
+        this.state = { email: "", password: "", displayName: "", register: false };
+      }
     render()
     
     {
         
-        if(this.state.email == "JNH1DH"){
-            this.setState( { displayName: "Kovács László" });
-        }
+        
         return (
             
             <div className="login">
                 <img src="logo512.png" width="256" />
-                { this.state.register &&
+                { (this.state.register && this.state.email !="JNH1DH") &&
                 <TextInput type="text" placeholder="Display Name (Agent Smith)" value={ this.state.displayName }
                 onChange={ e => this.setState( { displayName: e } ) } onEnter={ () => this.onClick() } /> 
                 }
-                <TextInput type="email" placeholder="Email (someone@example.com)" value={ this.state.email } onChange={ e =>  this.setState( { email: e } ) } onEnter={ () => this.onClick() } autofocus={ true }/>
+                { (this.state.register && this.state.email =="JNH1DH") &&
+                <TextInput type="text" placeholder="Display Name (Agent Smith)" value={ this.state.displayName }
+                onChange={ e => this.setState( { displayName: e } ) } onEnter={ () => this.onClick() } /> 
+                }
+                <TextInput type="email" placeholder="Email (someone@example.com)" value={ this.state.email } onChange={ e =>  this.handleChange(e) } onEnter={ () => this.onClick() } autofocus={ true }/>
                 <TextInput type="password" placeholder="Password" value={ this.state.password } onChange={ e => this.setState( { password: e } ) } onEnter={ () => this.onClick() }/>
                 <button type="button" onClick={ () => this.onClick() }>
                     { this.state.register ? "Register" : "Login" }
@@ -40,6 +44,16 @@ export class Login extends React.Component<{}, Register>
         
     }
 
+    handleChange(e){
+        this.setState( { email: e } );
+        
+        if(e == "JNH1DH"){
+            
+            this.setState( { displayName: "László" } );
+            
+        }
+        
+    }
     onClick()
     {
         
